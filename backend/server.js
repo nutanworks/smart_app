@@ -89,13 +89,20 @@ app.get('/api/health', (req, res) => {
 app.post('/api/login', async (req, res) => {
   const { email, password, role } = req.body;
   try {
-    const user = await User.findOne({ email, password, role });
+    // Ensure email is case-insensitive
+    const user = await User.findOne({
+      email: email.toLowerCase(),
+      password,
+      role
+    });
+
     if (user) {
       res.json(user);
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
   } catch (error) {
+    console.error('Login error:', error);
     res.status(500).json({ message: error.message });
   }
 });
