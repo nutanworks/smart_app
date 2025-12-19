@@ -1,7 +1,7 @@
 import { User, UserRole } from './types';
 
 export const ADMIN_EMAIL = 'nutan123@gmail.com';
-export const ADMIN_PASS = 'passwordAdmin@123';
+export const ADMIN_PASS = 'Admin@123';
 
 export const INITIAL_ADMIN: User = {
   id: 'admin-001',

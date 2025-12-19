@@ -44,7 +44,7 @@ mongoose.connect(MONGODB_URI)
 // Seed Admin Account
 const seedAdmin = async () => {
   const adminEmail = 'nutan123@gmail.com';
-  const adminPassword = 'passwordAdmin@123';
+  const adminPassword = 'Admin@123';
 
   try {
     const existingAdmin = await User.findOne({ email: adminEmail });
