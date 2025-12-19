@@ -3,6 +3,9 @@ import { INITIAL_ADMIN, ADMIN_EMAIL, ADMIN_PASS } from '../constants';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
+// Debug: Log the API URL being used
+console.log('🔗 API URL:', API_URL);
+
 // --- MOCK STORAGE IMPLEMENTATION (Fallback) ---
 // This allows the app to work even if the backend server is not running
 const STORAGE_KEY_USERS = 'sa_users';
