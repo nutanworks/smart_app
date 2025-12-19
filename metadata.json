@@ -1,0 +1,7 @@
+{
+  "name": "Smart Attendance System",
+  "description": "A QR-code based attendance tracking system for schools with Admin, Teacher, and Student portals.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
