@@ -48,6 +48,6 @@ The frontend needs to know where the backend is.
 2.  Select your project -> **Settings** -> **Environment Variables**.
 3.  Add a new variable:
     *   **Key**: `VITE_API_URL`
-    *   **Value**: Your Render Backend URL (e.g., `https://smart-attendance-backend.onrender.com/api`).
+    *   **Value**: Your Render Backend URL (e.g., `https://smart-app-p0qn.onrender.com/api`).
     *   *Note: Make sure to include `/api` at the end.*
 4.  **Redeploy** your Frontend (Vercel) for the changes to take effect.
