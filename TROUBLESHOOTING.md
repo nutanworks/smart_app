@@ -30,3 +30,24 @@ After making these changes:
 1.  Redeploy your service (if needed) or restart it.
 2.  Check the **Logs** tab in your hosting dashboard.
 3.  Look for "Connected to MongoDB Atlas successfully".
+
+---
+
+# Frontend Connection Troubleshooting
+
+If your frontend is saving data locally instead of to the database, it means it cannot connect to the backend.
+
+## 1. Check CORS Settings (Backend)
+The backend must allow the frontend URL to connect.
+-   I have updated `backend/server.js` to include `https://smart-app-4982.vercel.app`.
+-   **Action**: Redeploy your Backend (Render).
+
+## 2. Check API URL (Frontend)
+The frontend needs to know where the backend is.
+1.  Go to your **Vercel Dashboard**.
+2.  Select your project -> **Settings** -> **Environment Variables**.
+3.  Add a new variable:
+    *   **Key**: `VITE_API_URL`
+    *   **Value**: Your Render Backend URL (e.g., `https://smart-attendance-backend.onrender.com/api`).
+    *   *Note: Make sure to include `/api` at the end.*
+4.  **Redeploy** your Frontend (Vercel) for the changes to take effect.
