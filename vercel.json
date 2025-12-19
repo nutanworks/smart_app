@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "env": {
+    "VITE_API_URL": {
+      "description": "Backend API URL pointing to Render service",
+      "example": "https://smart-app-p0qn.onrender.com/api"
+    }
+  }
+}
