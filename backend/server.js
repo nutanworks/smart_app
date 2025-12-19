@@ -59,6 +59,22 @@ const seedAdmin = async () => {
 
 // Routes
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  const mongooseState = mongoose.connection.readyState;
+  const states = {
+    0: 'disconnected',
+    1: 'connected',
+    2: 'connecting',
+    3: 'disconnecting'
+  };
+  res.json({
+    status: 'ok',
+    mongodb: states[mongooseState],
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Login
 app.post('/api/login', async (req, res) => {
   const { email, password, role } = req.body;
