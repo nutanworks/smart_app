@@ -23,19 +23,29 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 // Connect to MongoDB Atlas
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://admin:2pzUiQJm7jCd4GF4@details.vczgwr8.mongodb.net/smart_attendance?appName=details';
 
+// Log the URI (masking password) for debugging
+const maskedURI = MONGODB_URI.replace(/:([^:@]+)@/, ':****@');
+console.log(`Attempting to connect to MongoDB at: ${maskedURI}`);
+
 mongoose.connect(MONGODB_URI)
-.then(async () => {
-  console.log('Connected to MongoDB Atlas successfully');
-  await seedAdmin();
-}).catch(err => {
-  console.error('MongoDB connection error:', err);
-});
+  .then(async () => {
+    console.log('Connected to MongoDB Atlas successfully');
+    await seedAdmin();
+  }).catch(err => {
+    console.error('MongoDB connection error details:', {
+      message: err.message,
+      name: err.name,
+      code: err.code,
+      codeName: err.codeName
+    });
+    console.error('Full error object:', err);
+  });
 
 // Seed Admin Account
 const seedAdmin = async () => {
   const adminEmail = 'nutan123@gmail.com';
   const adminPassword = 'Admin@123';
-  
+
   try {
     const existingAdmin = await User.findOne({ email: adminEmail });
     if (!existingAdmin) {
@@ -134,7 +144,7 @@ app.put('/api/users/:id', async (req, res) => {
   try {
     const updatedUser = await User.findOneAndUpdate({ id }, req.body, { new: true });
     if (!updatedUser) {
-        return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
     res.json(updatedUser);
   } catch (error) {
@@ -165,9 +175,9 @@ app.get('/api/attendance', async (req, res) => {
     if (subject && subject !== 'All') query.subject = subject;
 
     if (startDate || endDate) {
-       query.date = {};
-       if (startDate) query.date.$gte = startDate;
-       if (endDate) query.date.$lte = endDate;
+      query.date = {};
+      if (startDate) query.date.$gte = startDate;
+      if (endDate) query.date.$lte = endDate;
     }
 
     const records = await Attendance.find(query).sort({ timestamp: -1 });
@@ -197,7 +207,7 @@ app.get('/api/notices', async (req, res) => {
   const { teacherId, studentId } = req.query;
   try {
     let query = {};
-    
+
     if (teacherId) {
       // Get notices created by this teacher
       query.teacherId = teacherId;
