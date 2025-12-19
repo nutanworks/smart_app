@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: smart-attendance-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node backend/server.js
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://admin:2pzUiQJm7jCd4GF4@details.vczgwr8.mongodb.net/smart_attendance?appName=details
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+
+  - type: web
+    name: smart-attendance-frontend
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://smart-attendance-backend.onrender.com/api
