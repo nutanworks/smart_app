@@ -320,8 +320,9 @@ const api = {
         } catch (err: any) {
             // Fallback if backend is down
             if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError') || err.name === 'TypeError') {
-                console.warn('Backend unavailable. Switching to localStorage fallback.');
-                return handleMockRoute('GET', endpoint);
+                console.error('Backend unavailable:', err);
+                // DISABLE FALLBACK to force debugging
+                throw err;
             }
             throw err;
         }
@@ -341,8 +342,9 @@ const api = {
         } catch (err: any) {
             // Fallback if backend is down
             if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError') || err.name === 'TypeError') {
-                console.warn('Backend unavailable. Switching to localStorage fallback.');
-                return handleMockRoute('POST', endpoint, data);
+                console.error('Backend unavailable:', err);
+                // DISABLE FALLBACK to force debugging
+                throw err;
             }
             throw err;
         }
