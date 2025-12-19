@@ -1,7 +1,7 @@
 import { User, AttendanceRecord, UserRole, SystemSettings, Notice } from '../types';
 import { INITIAL_ADMIN, ADMIN_EMAIL, ADMIN_PASS } from '../constants';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://smart-app-p0qn.onrender.com/api';
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'development' ? 'http://localhost:5000/api' : 'https://smart-app-p0qn.onrender.com/api');
 
 // Debug: Log the API URL being used
 console.log('🔗 API URL:', API_URL);
