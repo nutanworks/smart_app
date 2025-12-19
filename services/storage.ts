@@ -1,7 +1,7 @@
 import { User, AttendanceRecord, UserRole, SystemSettings, Notice } from '../types';
 import { INITIAL_ADMIN, ADMIN_EMAIL, ADMIN_PASS } from '../constants';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // --- MOCK STORAGE IMPLEMENTATION (Fallback) ---
 // This allows the app to work even if the backend server is not running

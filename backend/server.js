@@ -11,7 +11,9 @@ const PORT = 5000;
 
 // Middleware
 app.use(cors({
-  origin: ['https://smart-attendance.vercel.app', 'http://localhost:5173'],
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://smart-attendance.vercel.app', 'https://your-domain.com']
+    : ['http://localhost:5173', 'http://localhost:3000'],
   credentials: true,
   optionsSuccessStatus: 200
 }));
