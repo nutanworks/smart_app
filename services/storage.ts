@@ -392,7 +392,7 @@ const api = {
 export const checkBackendConnection = async (): Promise<boolean> => {
     try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 2000); // 2s timeout
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s timeout for Render cold start
         const res = await fetch(`${API_URL}/users?role=ADMIN`, { signal: controller.signal });
         clearTimeout(timeoutId);
         return res.ok;
